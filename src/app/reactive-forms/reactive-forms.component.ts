@@ -9,14 +9,16 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class ReactiveFormsComponent implements OnInit {
 sample: string ="";
 public employeeForm : FormGroup;
-  constructor( private _fb:FormBuilder) { }
+  constructor( private _fb:FormBuilder) { 
+    this.employeeForm=this._fb.group({
+      fullName: new FormControl('',[Validators.required,Validators.minLength(3)]),
+      email: new FormControl('',Validators.required)
+    });
+  
+  }
 
   ngOnInit() {
-   this.employeeForm=this._fb.group({
-    fullName: new FormControl('',[Validators.required,Validators.minLength(5)]),
-    email: new FormControl('',Validators.required)
-  });
-
+  
  
 }
 onSubmit(): void {
