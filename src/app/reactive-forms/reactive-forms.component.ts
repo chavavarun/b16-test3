@@ -11,7 +11,7 @@ sample: string ="";
 public employeeForm : FormGroup;
   constructor( private _fb:FormBuilder) { 
     this.employeeForm=this._fb.group({
-      fullName: new FormControl('',[Validators.required,Validators.minLength(3)]),
+      fullName: new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(10)]),
       email: new FormControl('',Validators.required)
     });
   
@@ -29,4 +29,15 @@ onSubmit(): void {
   this.sample=this.employeeForm.controls['fullName'].value + " " + "submitted successfully";
   }
 }
+// public validateFullName(){
+//   if (this.employeeForm.get('fullName')?.hasError('required')){
+//     this.sample="Name is Required"
+//   }
+//   else if (this.employeeForm.get('fullName')?.hasError('minlength')){
+//     this.sample="More Than 3 characters is Required"
+//   }
+//   else {
+//     this.sample=''
+//   }
+// }
 }
