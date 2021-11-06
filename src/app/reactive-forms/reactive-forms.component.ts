@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-reactive-forms',
@@ -7,18 +7,24 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./reactive-forms.component.scss']
 })
 export class ReactiveFormsComponent implements OnInit {
-
-employeeForm : FormGroup = new FormGroup({
-  fullName: new FormControl(''),
-  email: new FormControl('')
-});
-  constructor() { }
+sample: string ="";
+public employeeForm : FormGroup;
+  constructor( private _fb:FormBuilder) { }
 
   ngOnInit() {
-   
-  }
+   this.employeeForm=this._fb.group({
+    fullName: new FormControl('',[Validators.required,Validators.minLength(5)]),
+    email: new FormControl('',Validators.required)
+  });
 
-  onSubmit(): void {
-    console.log(this.employeeForm?.value)
+ 
+}
+onSubmit(): void {
+  if (this.employeeForm.valid) {
+
+  
+  console.log(this.employeeForm?.value)
+  this.sample=this.employeeForm.controls['fullName'].value + " " + "submitted successfully";
   }
+}
 }
